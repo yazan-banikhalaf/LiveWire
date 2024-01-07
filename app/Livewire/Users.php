@@ -9,7 +9,6 @@ class Users extends Component
 {
     public $users; 
     
-    public $formMode = null;
     public $UserId;
     public $name;
     public $email;
