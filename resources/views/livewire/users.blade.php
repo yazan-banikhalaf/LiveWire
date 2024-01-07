@@ -35,24 +35,7 @@
     </div>
     @endif
 
-    @if($formMode === 'create')
-    <div class="update-form">
-        <div class="form-floating mb-3">
-            <input type="text" wire:model="name" class="form-control" placeholder="Name">
-            <label for="name">Name</label>
-        </div>
-        <div class="form-floating mb-3">
-            <input type="email" wire:model="email" class="form-control" placeholder="name@example.com">
-            <label for="email">Email address</label>
-        </div>
-        <div class="form-floating mb-3">
-            <input type="password" wire:model="password" class="form-control" placeholder="Enter the password">
-            <label for="email">Password</label>
-        </div>
-        <button wire:click="createUser" class="btn btn-success btn-sm">submit</button>
-        <button wire:click="cancelBox" class="btn btn-secondary btn-sm">Cancel</button>
-    </div>
-    @endif
+    
     @if (session()->has('message'))
     <div class="container mt-4">
         <div class="alert alert-success">
