@@ -2,12 +2,15 @@
 
 namespace App\Livewire;
 
-use App\Models\User;
 use Livewire\Component;
+use App\Models\User;
+
+
 
 class Users extends Component
 {
-    public $users; 
+    public $search='';
+
     public $showform=false;
     public $UserId;
     public $name;
@@ -39,10 +42,6 @@ class Users extends Component
         return view('dashboard');
     } 
 
-    public function mount()
-    {
-        $this->users = User::all();
-    }
     public function editUser($userId)
     {
         $user = User::findOrFail($userId);
@@ -88,6 +87,10 @@ class Users extends Component
     }      
     public function render()
     {
-        return view('livewire.users');
+        $users = User::where('name', 'like', '%' . $this->search . '%')
+        ->orWhere('email', 'like', '%' . $this->search . '%')
+        ->orderBy('id', 'DESC')
+        ->get();
+        return view('livewire.users',['users' => $users]);
     }
 }
