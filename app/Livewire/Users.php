@@ -8,14 +8,28 @@ use Livewire\Component;
 class Users extends Component
 {
     public $users; 
-    
+    public $showform=false;
     public $UserId;
     public $name;
     public $email;
     public $password;
     
+    public function resetFields()
+    {
+        $this->UserId = '';
+        $this->name = '';
+        $this->email = '';
+        $this->password = '';
+    }
+    public function toggleForm()
+    {
+        $this->showform = true;
+        $this->UserId = '';
+        $this->resetFields();
+    }
     public function cancelBox()
     {
+        $this->showform = false;
         $this->UserId = '';
         $this->name = '';
         $this->email = '';
@@ -28,10 +42,6 @@ class Users extends Component
     public function mount()
     {
         $this->users = User::all();
-    }
-    public function render()
-    {
-        return view('livewire.users');
     }
     public function editUser($userId)
     {
@@ -51,25 +61,33 @@ class Users extends Component
         session()->flash('message', 'User updated successfully!');
         return redirect('/dashboard');
     }
+    public function CreateUser()
+    {
+        $this->validate([
+            'name' => 'required',
+            'email' => 'required|email|unique:users,email',
+            'password' => 'required|min:6',
+        ]);
+        User::create([
+            'name' => $this->name,
+            'email' => $this->email,
+            'password' => bcrypt($this->password),
+        ]);
+        session()->flash('message', 'User created successfully!');
+        $this->cancelBox();
+        return redirect('/dashboard');
+    }
+
     public function destroyUser($UserId)
     {
         $user = User::find($UserId);
         $user->delete();
         session()->flash('message', 'User deleted successfully!');
         return redirect('/dashboard');
-
-    }
-    public function createUser()
-    {
-        $newUser = User::create([
-            'name' => $this->name,
-            'email' => $this->email,
-            'password' => bcrypt($this->password),
-        ]);
-        session()->flash('message', 'User created successfully!');
-        return redirect('/dashboard');
         
+    }      
+    public function render()
+    {
+        return view('livewire.users');
     }
-      
-    
 }

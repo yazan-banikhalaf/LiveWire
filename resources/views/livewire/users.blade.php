@@ -1,4 +1,5 @@
 <div>
+    <button wire:click ="toggleForm" class="btn btn-md btn-success text-end">Create</button>
     <table class="table">
         <thead>
             <tr class="text-center">
@@ -30,17 +31,27 @@
             <input type="email" wire:model="email" class="form-control" placeholder="name@example.com">
             <label for="email">Email address</label>
         </div>
-        <button wire:click="updateUser" class="btn btn-primary btn-sm">Update</button>
+        <button wire:click="updateUser" class="btn btn-primary btn-sm">edit</button>
+        <button wire:click="cancelBox" class="btn btn-secondary btn-sm">Cancel</button>
+    </div>
+    @else
+    @if($showform)
+    <div class="create-form">
+        <div class="form-floating mb-3">
+            <input type="text" wire:model="name" class="form-control" placeholder="Name">
+            <label for="name">Name</label>
+        </div>
+        <div class="form-floating mb-3">
+            <input type="email" wire:model="email" class="form-control" placeholder="name@example.com">
+            <label for="Email">Email address</label>
+        </div>
+        <div class="form-floating mb-3">
+            <input type="password" wire:model="password" class="form-control" placeholder="name@example.com">
+            <label for="passowrd">password</label>
+        </div>
+        <button wire:click="CreateUser" class="btn btn-success btn-sm">Create</button>
         <button wire:click="cancelBox" class="btn btn-secondary btn-sm">Cancel</button>
     </div>
     @endif
-
-    
-    @if (session()->has('message'))
-    <div class="container mt-4">
-        <div class="alert alert-success">
-            {{ session('message') }}
-        </div>
-    </div>
-    @endif
+@endif
 </div>
