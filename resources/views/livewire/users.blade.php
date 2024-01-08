@@ -1,5 +1,4 @@
 <div>
-    {{$search}}
     <div class="content">
         <div class="row">
             <div class="mb-2">
