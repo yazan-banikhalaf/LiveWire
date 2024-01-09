@@ -88,9 +88,9 @@ class Users extends Component
     public function render()
     {
         $users = User::where('name', 'like', '%' . $this->search . '%')
-        ->orWhere('email', 'like', '%' . $this->search . '%')
-        ->orderBy('id', 'DESC')
-        ->get();
-        return view('livewire.users',['users' => $users]);
+            ->orWhere('email', 'like', '%' . $this->search . '%')
+            ->orderBy('id', 'DESC')
+            ->paginate(10);
+            return view('livewire.users',['users' => $users]);
     }
 }

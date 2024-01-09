@@ -1,20 +1,23 @@
 <div>
     <div class="content">
         <div class="row">
-            <div class="mb-2">
-                <svg wire:click="toggleForm" xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="green"
-                    class="bi bi-plus" viewBox="0 0 16 16">
-                    <path
-                        d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4" />
-                </svg>
+            <div class="col-md-6 d-flex justify-content-start align-items-center">
+                <div class="mb-2">
+                    <form>
+                        <x-text-input wire:model.live="search" type="search" placeholder="Search..." />
+                    </form>
+                </div>
             </div>
-            <div class="mb-2">
-                <form>
-                    <input wire:model="search" type="search" placeholder="Search..."/>
-
-                </form>
+            <div class="col-md-6 d-flex justify-content-end">
+                <div class="mb-2" title="Add user">
+                    <svg wire:click="toggleForm" xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="green"
+                        class="bi bi-plus" viewBox="0 0 16 16">
+                        <path
+                            d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4" />
+                    </svg>
+                </div>
             </div>
-        </div>
+        </div>        
         <table class="table">
             <thead>
                 <tr class="text-center">
@@ -42,11 +45,11 @@
         @if($UserId)
         <div class="edit-form">
             <div class="form-floating mb-3">
-                <input type="text" wire:model="name" class="form-control" placeholder="Name">
+                <input type="" wire:model="name" class="form-control" placeholder="Name">
                 <label for="name">Name</label>
             </div>
             <div class="form-floating mb-3">
-                <input type="email" wire:model="email" class="form-control" placeholder="name@example.com">
+                <x-text-input type="email" wire:model="email"  placeholder="name@example.com"/>
                 <label for="email">Email address</label>
             </div>
             <button wire:click="updateUser" class="btn btn-primary btn-sm">edit</button>
@@ -74,7 +77,7 @@
         @endif
         <div>
 
-            {{-- {{$users -> links()}} --}}
+            {{$users -> links()}}
         </div>
     </div>
 </div>
