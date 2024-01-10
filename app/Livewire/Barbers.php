@@ -12,14 +12,14 @@ class Barbers extends Component
     public $showform = false;
     public $name;
     public $email;
-    public $password;
+    public $phone;
 
     public function resetFields()
     {
         $this->BarberId = '';
         $this->name = '';
         $this->email = '';
-        $this->password = '';
+        $this->phone = '';
     }
     public function toggleForm()
     {
@@ -36,20 +36,13 @@ class Barbers extends Component
     {
         $this->validate([
             'name' => 'required',
-            'email' => 'required|email|unique:barbers,email',
-            'password' => 'required|min:6',
-        ], [
-            'name.required' => 'The name field is required.',
-            'email.required' => 'The email field is required.',
-            'email.email' => 'Please enter a valid email address.',
-            'email.unique' => 'This email has already been taken.',
-            'password.required' => 'The password field is required.',
-            'password.min' => 'The password must be at least 6 characters.',
+            'email' => 'nullable|email|unique:barbers,email',
+            'phone' => 'required|unique:barbers,phone',
         ]);
         Barber::create([
             'name' => $this->name,
             'email' => $this->email,
-            'password' => $this->password
+            'phone' => $this->phone
         ]);
         session()->flash('message', 'Barber created successfully!');
         $this->cancelBox();

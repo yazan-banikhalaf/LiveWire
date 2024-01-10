@@ -1,96 +1,91 @@
-    <div class="content">
-        <div class="row">
-            <div class="col-md-6 d-flex justify-content-start align-items-center">
-                <div class="mb-2">
-                    <form>
-                        <x-text-input wire:model.live="search" type="search" placeholder="Search..." />
-                    </form>
-                </div>
-            </div>
-            <div class="col-md-6 d-flex justify-content-end">
-                <div class="mb-2" title="Add user">
-                    <svg wire:click="toggleForm" xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="green"
-                        class="bi bi-plus" viewBox="0 0 16 16">
-                        <path
-                            d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4" />
-                    </svg>
-                </div>
-            </div>
-        </div>        
-        <table class="table">
-            <thead>
-                <tr class="text-center">
-                    <th scope="col">#</th>
-                    <th scope="col">Name</th>
-                    <th scope="col">Email</th>
-                    <th scope="col"></th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach ($barbers as $barber)
-                
-                <tr class="text-center">
-                    <td>{{ $barber->id }}</td>
-                    <td>{{ $barber->name }}</td>
-                    <td>{{ $barber->email }}</td>
-                    <td><button wire:click="edit({{ $barber->id }})" class="text-info me-4">Edit</button>
-                        <button wire:click="destroy({{ $barber->id }})" class="text-danger">Delete</button>
-                    </td>
-                </tr>
-                @endforeach
-            </tbody>
-        </table>
+<div>
+    <div class="flex justify-between mb-4">
+        <!-- Search bar on the left -->
+        <div class="w-1/2">
+            <x-input-label for="search" />
+            <x-text-input wire:model="search" id="search" class="block mt-1 w-full" type="email" name="email" : placeholder="Search barbers..." />
+        </div>
 
-        @if($BarberId)
-        <div class="edit-form">
-            <div class="form-floating mb-3">
-                <input type="" wire:model="name" class="form-control" placeholder="Name">
-                <label for="name">Name</label>
-                @error('name')
-                    <span class="text-danger text-xs">{{$message}}</span>
-                @enderror
-            </div>
-            <div class="form-floating mb-3">
-                <x-text-input type="email" wire:model="email" class="form-control" placeholder="name@example.com"/>
-                <label for="email">Email address</label>
-                @error('email')
-                    <span class="text-danger text-xs">{{$message}}</span>
-                @enderror
-            </div>
-            <button wire:click="update" class="btn btn-primary btn-sm">Edit</button>
-            <button wire:click="cancelBox" class="btn btn-secondary btn-sm">Cancel</button>
-        </div>
-        @else
-        @if($showform)
-        <div class="create-form">
-            <div class="form-floating mb-3">
-                <input type="text" wire:model="name" class="form-control" placeholder="Name">
-                <label for="name">Name</label>
-                @error('name')
-                    <span class="text-danger text-xs">{{$message}}</span>
-                @enderror
-            </div>
-            <div class="form-floating mb-3">
-                <input type="email" wire:model="email" class="form-control" placeholder="name@example.com">
-                <label for="Email">Email address</label>
-                @error('email')
-                    <span class="text-danger text-xs">{{$message}}</span>
-                @enderror
-            </div>
-            <div class="form-floating mb-3">
-                <input type="password" wire:model="password" class="form-control" placeholder="name@example.com">
-                <label for="passowrd">password</label>
-                @error('password')
-                    <span class="text-danger text-xs">{{$message}}</span>
-                @enderror
-            </div>
-            <button wire:click="create" class="btn btn-success btn-sm">Create</button>
-            <button wire:click="cancelBox" class="btn btn-secondary btn-sm">Cancel</button>
-        </div>
-        @endif
-        @endif
+        <!-- Add button on the right -->
         <div>
-            {{$barbers -> links()}}
+            <button wire:click="toggleForm" class="bg-orange-500 hover:bg-orange-700 text-white font-bold py-2 px-4 rounded">
+                Add Barber
+            </button>
         </div>
     </div>
+
+    @if($showForm)
+        <form wire:submit.prevent="create" class="mb-4 p-4 rounded shadow-lg bg-white">
+            <div class="mb-4">
+                <label class="block text-gray-700 text-sm font-bold mb-2" for="name">Name</label>
+                <input wire:model="name" type="text" placeholder="Enter name" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+                @error('name') <span class="text-red-500 text-xs">{{$message}}</span> @enderror
+            </div>
+            <!-- Similar blocks for 'email' and 'phone' -->
+
+            <!-- Submit button -->
+            <button type="submit" class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded">
+                Save Barber
+            </button>
+            <button wire:click="cancelBox" class="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded">
+                Cancel
+            </button>
+        </form>
+    @endif
+
+
+
+    <div class="dark:bg-gray-800 p-4">
+        <table class="min-w-full leading-normal">
+            <thead>
+            <tr class="bg-gray-200 dark:bg-gray-700">
+                <th class="px-5 py-3 border-b-2 border-gray-200 text-gray-800 dark:text-gray-300 text-left text-sm uppercase font-normal">
+                    #ID
+                </th>
+                <th class="px-5 py-3 border-b-2 border-gray-200 text-gray-800 dark:text-gray-300 text-left text-sm uppercase font-normal">
+                    Name
+                </th>
+                <th class="px-5 py-3 border-b-2 border-gray-200 text-gray-800 dark:text-gray-300 text-left text-sm uppercase font-normal">
+                    Email
+                </th>
+                <th class="px-5 py-3 border-b-2 border-gray-200 text-gray-800 dark:text-gray-300 text-left text-sm uppercase font-normal">
+                    Phone
+                </th>
+                <th class="px-5 py-3 border-b-2 border-gray-200 text-gray-800 dark:text-gray-300 text-left text-sm uppercase font-normal">
+                    Actions
+                </th>
+            </tr>
+            </thead>
+            <tbody>
+            @foreach($barbers as $barber)
+                <tr class="bg-white dark:bg-gray-800 hover:bg-gray-100 dark:hover:bg-gray-600">
+                    <td class="px-5 py-5 border-b border-gray-200 text-sm">
+                        <div class="text-gray-900 dark:text-gray-300">1</div>
+                    </td>
+                    <td class="px-5 py-5 border-b border-gray-200 text-sm">
+                        <div class="text-gray-900 dark:text-gray-300">{{$barber->name}}</div>
+                    </td>
+                    <td class="px-5 py-5 border-b border-gray-200 text-sm">
+                        <div class="text-gray-900 dark:text-gray-300">{{$barber->email}}</div>
+                    </td>
+                    <td class="px-5 py-5 border-b border-gray-200 text-sm">
+                        <div class="text-gray-900 dark:text-gray-300">{{$barber->phone}}</div>
+                    </td>
+                    <td class="px-5 py-5 border-b border-gray-200 text-sm">
+                        <div class="flex">
+                            <button class="text-blue-500 dark:text-blue-300 hover:text-blue-700 dark:hover:text-blue-500 mr-2">
+                                Edit
+                            </button>
+                            <button class="text-red-500 dark:text-red-300 hover:text-red-700 dark:hover:text-red-500">
+                                Delete
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+            @endforeach
+            </tbody>
+        </table>
+    </div>
+
 </div>
+
