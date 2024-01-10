@@ -28,31 +28,31 @@
                 </tr>
             </thead>
             <tbody>
-                {{-- @dd($users); --}}
-                @foreach ($users as $user)
+                @foreach ($barbers as $barber)
                 
                 <tr class="text-center">
-                    <td>{{ $user->id }}</td>
-                    <td>{{ $user->name }}</td>
-                    <td>{{ $user->email }}</td>
-                    <td><button wire:click="editUser({{ $user->id }})" class="text-info me-4">Edit</button>
-                        <button wire:click="destroyUser({{ $user->id }})" class="text-danger">Delete</button></td>
+                    <td>{{ $barber->id }}</td>
+                    <td>{{ $barber->name }}</td>
+                    <td>{{ $barber->email }}</td>
+                    <td><button wire:click="edit({{ $barber->id }})" class="text-info me-4">Edit</button>
+                        <button wire:click="destroy({{ $barber->id }})" class="text-danger">Delete</button>
+                    </td>
                 </tr>
                 @endforeach
             </tbody>
         </table>
 
-        @if($UserId)
+        @if($BarberId)
         <div class="edit-form">
             <div class="form-floating mb-3">
-                <x-text-input type="" wire:model="name" class="form-control" placeholder="Name"/>
+                <input type="" wire:model="name" class="form-control" placeholder="Name">
                 <label for="name">Name</label>
             </div>
             <div class="form-floating mb-3">
                 <x-text-input type="email" wire:model="email" class="form-control" placeholder="name@example.com"/>
                 <label for="email">Email address</label>
             </div>
-            <button wire:click="updateUser" class="btn btn-primary btn-sm">Edit</button>
+            <button wire:click="update" class="btn btn-primary btn-sm">Edit</button>
             <button wire:click="cancelBox" class="btn btn-secondary btn-sm">Cancel</button>
         </div>
         @else
@@ -70,14 +70,13 @@
                 <input type="password" wire:model="password" class="form-control" placeholder="name@example.com">
                 <label for="passowrd">password</label>
             </div>
-            <button wire:click="CreateUser" class="btn btn-success btn-sm">Create</button>
+            <button wire:click="create" class="btn btn-success btn-sm">Create</button>
             <button wire:click="cancelBox" class="btn btn-secondary btn-sm">Cancel</button>
         </div>
         @endif
         @endif
         <div>
-
-            {{$users -> links()}}
+            {{$barbers -> links()}}
         </div>
     </div>
 </div>

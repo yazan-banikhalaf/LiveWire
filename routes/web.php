@@ -1,8 +1,11 @@
 <?php
 
+use App\Models\Barber;
 use App\Livewire\Users;
+use App\Livewire\Barbers;
 use App\Livewire\EditUser;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\BarberController;
 use App\Http\Controllers\ProfileController;
 
 /*
@@ -21,6 +24,8 @@ Route::get('/', function () {
 });
 
 Route::get('/dashboard', [Users::class,'index'])->name('dashboard');
+Route::get('/barbers', [BarberController::class,'index'])->name('barbers');
+
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

@@ -27,15 +27,13 @@ class Users extends Component
     public function toggleForm()
     {
         $this->showform = true;
-        $this->UserId = '';
         $this->resetFields();
     }
     public function cancelBox()
     {
         $this->showform = false;
-        $this->UserId = '';
-        $this->name = '';
-        $this->email = '';
+        $this->resetFields();
+
     }
     public function index()
     {
