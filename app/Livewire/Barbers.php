@@ -34,6 +34,18 @@ class Barbers extends Component
     }
     public function create()
     {
+        $this->validate([
+            'name' => 'required',
+            'email' => 'required|email|unique:barbers,email',
+            'password' => 'required|min:6',
+        ], [
+            'name.required' => 'The name field is required.',
+            'email.required' => 'The email field is required.',
+            'email.email' => 'Please enter a valid email address.',
+            'email.unique' => 'This email has already been taken.',
+            'password.required' => 'The password field is required.',
+            'password.min' => 'The password must be at least 6 characters.',
+        ]);
         Barber::create([
             'name' => $this->name,
             'email' => $this->email,
@@ -53,6 +65,15 @@ class Barbers extends Component
     }
     public function update()
     {
+        $this->validate([
+            'name' => 'required',
+            'email' => 'required|email|unique:users,email',
+        ], [
+            'name.required' => 'The name field is required.',
+            'email.required' => 'The email field is required.',
+            'email.email' => 'Please enter a valid email address.',
+            'email.unique' => 'This email has already been taken.',
+        ]);
         $barber = Barber::findOrFail($this->BarberId);
         $barber->update([
             'name' => $this->name,

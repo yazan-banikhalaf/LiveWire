@@ -1,4 +1,3 @@
-<div>
     <div class="content">
         <div class="row">
             <div class="col-md-6 d-flex justify-content-start align-items-center">
@@ -47,10 +46,16 @@
             <div class="form-floating mb-3">
                 <input type="" wire:model="name" class="form-control" placeholder="Name">
                 <label for="name">Name</label>
+                @error('name')
+                    <span class="text-danger text-xs">{{$message}}</span>
+                @enderror
             </div>
             <div class="form-floating mb-3">
                 <x-text-input type="email" wire:model="email" class="form-control" placeholder="name@example.com"/>
                 <label for="email">Email address</label>
+                @error('email')
+                    <span class="text-danger text-xs">{{$message}}</span>
+                @enderror
             </div>
             <button wire:click="update" class="btn btn-primary btn-sm">Edit</button>
             <button wire:click="cancelBox" class="btn btn-secondary btn-sm">Cancel</button>
@@ -61,14 +66,23 @@
             <div class="form-floating mb-3">
                 <input type="text" wire:model="name" class="form-control" placeholder="Name">
                 <label for="name">Name</label>
+                @error('name')
+                    <span class="text-danger text-xs">{{$message}}</span>
+                @enderror
             </div>
             <div class="form-floating mb-3">
                 <input type="email" wire:model="email" class="form-control" placeholder="name@example.com">
                 <label for="Email">Email address</label>
+                @error('email')
+                    <span class="text-danger text-xs">{{$message}}</span>
+                @enderror
             </div>
             <div class="form-floating mb-3">
                 <input type="password" wire:model="password" class="form-control" placeholder="name@example.com">
                 <label for="passowrd">password</label>
+                @error('password')
+                    <span class="text-danger text-xs">{{$message}}</span>
+                @enderror
             </div>
             <button wire:click="create" class="btn btn-success btn-sm">Create</button>
             <button wire:click="cancelBox" class="btn btn-secondary btn-sm">Cancel</button>

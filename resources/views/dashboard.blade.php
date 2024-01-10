@@ -29,11 +29,23 @@
         </x-slot>
         @if (session()->has('message'))
         <div class="container mt-4">
-            <div class="alert alert-success">
+            <div class="alert alert-success"
+             x-data="{ show: true }"
+             x-show="show"
+             x-transition
+             x-init="setTimeout(() => show = false, 4000)"
+            >
                 {{ session('message') }}
             </div>
         </div>
         @endif
+        {{-- @if (session()->has('error'))
+        <div class="container mt-2">
+            <div class="alert alert-danger">
+                {{ session('error') }}
+            </div>
+        </div>
+        @endif --}}
         <div class="py-12">
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
                 <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
