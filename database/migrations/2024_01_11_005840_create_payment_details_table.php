@@ -7,11 +7,11 @@ use Illuminate\Support\Facades\Schema;
 return new class extends Migration {
     public function up(): void
     {
-        Schema::create('customes', function (Blueprint $table) {
+        Schema::create('payment_details', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->string('phone')->unique();
-            $table->string('email')->unique()->nullable();
+            $table->string('product');
+            $table->text('note')->nullable();
+            $table->string('price');
             $table->softDeletes();
             $table->timestamps();
         });
@@ -19,6 +19,6 @@ return new class extends Migration {
 
     public function down(): void
     {
-        Schema::dropIfExists('customes');
+        Schema::dropIfExists('payment_details');
     }
 };

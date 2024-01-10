@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\BarberController;
+use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
@@ -24,6 +25,7 @@ Route::get('/dashboard', function () {
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::get('/barbers', [BarberController::class,'index'])->name('barbers');
+Route::get('/customers', [CustomerController::class,'index'])->name('customers');
 
 
 Route::middleware('auth')->group(function () {
