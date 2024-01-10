@@ -27,9 +27,25 @@
                 </x-dropdown-link>
             </form>
         </x-slot>
+        @if ($errors->any())
+            <div class="container mt-2">
+                <div class="alert alert-danger">
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            </div>
+        @endif
         @if (session()->has('message'))
         <div class="container mt-4">
-            <div class="alert alert-success">
+            <div class="alert alert-success"
+             x-data="{ show: true }"
+             x-show="show"
+             x-transition
+             x-init="setTimeout(() => show = false, 4000)"
+            >
                 {{ session('message') }}
             </div>
         </div>
