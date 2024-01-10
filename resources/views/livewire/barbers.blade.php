@@ -23,7 +23,9 @@
                     <th scope="col">#</th>
                     <th scope="col">Name</th>
                     <th scope="col">Email</th>
+                    <th scope="col">Phone Number</th>
                     <th scope="col"></th>
+
                 </tr>
             </thead>
             <tbody>
@@ -33,6 +35,8 @@
                     <td>{{ $barber->id }}</td>
                     <td>{{ $barber->name }}</td>
                     <td>{{ $barber->email }}</td>
+                    <td>{{ $barber->phone }}</td>
+
                     <td><button wire:click="edit({{ $barber->id }})" class="text-info me-4">Edit</button>
                         <button wire:click="destroy({{ $barber->id }})" class="text-danger">Delete</button>
                     </td>
@@ -57,6 +61,13 @@
                     <span class="text-danger text-xs">{{$message}}</span>
                 @enderror
             </div>
+            <div class="form-floating mb-3">
+                <input type="text" wire:model="phone" class="form-control" placeholder="Enter your phone number">
+                <label for="phone">Phone</label>
+                @error('phone')
+                    <span class="text-danger text-xs">{{$message}}</span>
+                @enderror
+            </div>
             <button wire:click="update" class="btn btn-primary btn-sm">Edit</button>
             <button wire:click="cancelBox" class="btn btn-secondary btn-sm">Cancel</button>
         </div>
@@ -78,9 +89,9 @@
                 @enderror
             </div>
             <div class="form-floating mb-3">
-                <input type="password" wire:model="password" class="form-control" placeholder="name@example.com">
-                <label for="passowrd">password</label>
-                @error('password')
+                <input type="text" wire:model="phone" class="form-control" placeholder="Enter your phone number">
+                <label for="phone">Phone</label>
+                @error('phone')
                     <span class="text-danger text-xs">{{$message}}</span>
                 @enderror
             </div>

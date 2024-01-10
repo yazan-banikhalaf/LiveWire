@@ -11,6 +11,6 @@ class Barber extends Model
     protected $fillable = [
         'name',
         'email',
-        'password'
+        'phone',
     ];
 }
