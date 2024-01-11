@@ -69,7 +69,7 @@ class CreatePayment extends Component
                 'payment_id' => $payment->id,
                 'product' => $this->product,
                 'note' => $this->note,
-                'price' => $this->price,
+                'price' => $this->product_price,
             ]);
         }
 

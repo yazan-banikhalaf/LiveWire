@@ -91,9 +91,9 @@
                     Status
                 </th>
 
-                <th class="px-5 py-3 border-b-2 border-gray-200 text-gray-800 dark:text-gray-300 text-left text-sm uppercase font-normal">
-                    Action
-                </th>
+{{--                <th class="px-5 py-3 border-b-2 border-gray-200 text-gray-800 dark:text-gray-300 text-left text-sm uppercase font-normal">--}}
+{{--                    Action--}}
+{{--                </th>--}}
             </tr>
             </thead>
             <tbody>
@@ -123,13 +123,13 @@
                         <div class="inline-flex items-center justify-center px-2 py-1 rounded-full {{ $payment->status == 'paid' ? 'text-green-300 dark:text-green-200 bg-green-700' : 'text-red-300 dark:text-red-200 bg-red-700' }}">{{$payment->status}}</div>
                     </td>
 
-                    <td class="px-5 py-5 border-b border-gray-200 text-sm">
-                        <div class="flex">
-                            <button wire:click="" class="text-blue-500 dark:text-blue-300 hover:text-blue-700 dark:hover:text-blue-500">
-                                show
-                            </button>
-                        </div>
-                    </td>
+{{--                    <td class="px-5 py-5 border-b border-gray-200 text-sm">--}}
+{{--                        <div class="flex">--}}
+{{--                            <button wire:click="" class="text-blue-500 dark:text-blue-300 hover:text-blue-700 dark:hover:text-blue-500">--}}
+{{--                                show--}}
+{{--                            </button>--}}
+{{--                        </div>--}}
+{{--                    </td>--}}
                 </tr>
             @endforeach
             </tbody>

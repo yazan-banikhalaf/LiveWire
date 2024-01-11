@@ -15,13 +15,13 @@
         <!-- Payment Total Card -->
         <div class="bg-white dark:bg-gray-800 dark:text-white shadow-md rounded-lg p-4 flex flex-col items-center justify-center">
             <div class="text-lg font-semibold">Payment Total</div>
-            <div class="text-2xl font-bold text-orange-500">{{$data['payment_total']}} JD</div>
+            <div class="text-2xl font-bold text-orange-500">0 JD</div>
         </div>
 
         <!-- Payment Details Card -->
         <div class="bg-white dark:bg-gray-800 dark:text-white shadow-md  rounded-lg p-4 flex flex-col items-center justify-center">
             <div class="text-lg font-semibold">Payment Details</div>
-            <div class="text-2xl font-bold text-orange-600">{{$data['payment_details_total']}} JD</div>
+            <div class="text-2xl font-bold text-orange-600">0 JD</div>
         </div>
 
         <!-- Customer Card -->
