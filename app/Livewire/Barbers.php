@@ -84,7 +84,7 @@ class Barbers extends Component
     {
         Barber::findorfail($id)->delete();
         session()->flash('message', 'User deleted successfully!');
-     $this->deletingBarberId = null;
+        $this->deletingBarberId = null;
         return redirect('/barbers');
     }
 
