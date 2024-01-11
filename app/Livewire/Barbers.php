@@ -18,10 +18,6 @@ class Barbers extends Component
     public $deletingBarberId = null;
 
 
-
-
- 
-
     public function resetFields()
     {
         $this->BarberId = '';
@@ -72,10 +68,6 @@ class Barbers extends Component
             'name' => 'required',
             'email' => ['nullable', 'email', Rule::unique('barbers', 'email')->ignore($this->BarberId)],
             'phone' => ['required', Rule::unique('barbers', 'phone')->ignore($this->BarberId)],
-
-
-
-
         ]);
         $barber = Barber::findOrFail($this->BarberId);
 
@@ -100,9 +92,6 @@ class Barbers extends Component
     {
         $this->deletingBarberId = $barberId;
     }
-
-
-
 
 
     public function render()
