@@ -111,7 +111,6 @@
 
         <div class="mt-4">
             {{$barbers->links()}}
-
         </div>
     </div>
 

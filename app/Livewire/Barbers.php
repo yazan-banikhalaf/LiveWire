@@ -19,6 +19,9 @@ class Barbers extends Component
 
 
 
+
+ 
+
     public function resetFields()
     {
         $this->BarberId = '';
@@ -70,13 +73,18 @@ class Barbers extends Component
             'email' => ['nullable', 'email', Rule::unique('barbers', 'email')->ignore($this->BarberId)],
             'phone' => ['required', Rule::unique('barbers', 'phone')->ignore($this->BarberId)],
 
+
+
+
         ]);
         $barber = Barber::findOrFail($this->BarberId);
+
         $barber->update([
             'name' => $this->name,
             'email' => $this->email,
             'phone' => $this->phone,
         ]);
+
         session()->flash('message', 'Barber updated successfully!');
         return redirect('/barbers');
     }
@@ -92,6 +100,11 @@ class Barbers extends Component
     {
         $this->deletingBarberId = $barberId;
     }
+
+
+
+
+
     public function render()
     {
         $barbers = Barber::where('name','like','%'.$this->search.'%')->orderBy('id', 'DESC')->paginate(10);
