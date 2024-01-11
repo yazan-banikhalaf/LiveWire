@@ -96,7 +96,13 @@
                 <input id="remember_me" wire:change.live="toggleDetails" wire:model.live="check" type="checkbox" class="rounded dark:bg-gray-900 border-gray-300 dark:border-gray-700 text-indigo-600 shadow-sm focus:ring-indigo-500 dark:focus:ring-indigo-600 dark:focus:ring-offset-gray-800">
                 <span class="ms-2 text-sm text-gray-600 dark:text-gray-400"> more </span>
             </label>
+
+            <label for="status" class="inline-flex items-center">
+                <input id="status" wire:change.live="toggleStatus" wire:model.live="status" type="checkbox" class="rounded dark:bg-gray-900 border-gray-300 dark:border-gray-700 text-indigo-600 shadow-sm focus:ring-indigo-500 dark:focus:ring-indigo-600 dark:focus:ring-offset-gray-800">
+                <span class="ms-2 text-sm text-gray-600 dark:text-gray-400"> pending </span>
+            </label>
         </div>
+
     </div>
 
     @if($show_details)

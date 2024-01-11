@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\BarberController;
 use App\Http\Controllers\CustomerController;
+use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
@@ -26,6 +27,7 @@ Route::get('/dashboard', function () {
 
 Route::get('/barbers', [BarberController::class,'index'])->name('barbers');
 Route::get('/customers', [CustomerController::class,'index'])->name('customers');
+Route::get('/payments', [PaymentController::class,'index'])->name('payments');
 
 
 Route::middleware('auth')->group(function () {

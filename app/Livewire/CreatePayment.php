@@ -13,6 +13,7 @@ class CreatePayment extends Component
     public $barber;
     public $customer = '';
     public $check;
+    public $status;
     public $price;
     public $type;
 
@@ -48,11 +49,13 @@ class CreatePayment extends Component
             'type' => 'required|in:cash,qlik',
         ]);
 
+
         $payment = Payment::create([
             'customer_id' => $this->customer_id,
             'barber_id' => $this->barber,
             'price' => $this->price,
             'type' => $this->type,
+            'status' => $this->status,
         ]);
 
         if ($this->show_details)
@@ -83,6 +86,8 @@ class CreatePayment extends Component
         $this->barber = '';
         $this->price = '';
         $this->type = '';
+        $this->status = '';
+        $this->check = '';
     }
 
     public function selectCustomer($customer_name)
@@ -101,10 +106,26 @@ class CreatePayment extends Component
         }
     }
 
+    public function toggleStatus()
+    {
+        if ($this->status)
+        {
+            $this->status = 'pending';
+        } else {
+            $this->status = 'paid';
+        }
+
+    }
+
     public function creatCustomer()
     {
-        Customer::create([
-            'name' => $this->customer
-        ]);
+        if (!empty($this->name))
+        {
+            Customer::create([
+                'name' => $this->customer
+            ]);
+
+            session()->flash('message', 'Customer created successfully!');
+        }
     }
 }
