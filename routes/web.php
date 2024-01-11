@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\BarberController;
 use App\Http\Controllers\CustomerController;
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
@@ -21,16 +22,16 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
-
-Route::get('/barbers', [BarberController::class,'index'])->name('barbers');
-Route::get('/customers', [CustomerController::class,'index'])->name('customers');
-Route::get('/payments', [PaymentController::class,'index'])->name('payments');
-
 
 Route::middleware('auth')->group(function () {
+
+    Route::get('/dashboard', [DashboardController::class,'index'])->name('dashboard');
+
+    Route::get('/barbers', [BarberController::class,'index'])->name('barbers');
+    Route::get('/customers', [CustomerController::class,'index'])->name('customers');
+    Route::get('/payments', [PaymentController::class,'index'])->name('payments');
+
+
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');

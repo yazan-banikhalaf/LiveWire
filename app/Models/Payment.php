@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Payment extends Model
@@ -15,6 +16,7 @@ class Payment extends Model
         'barber_id',
         'type',
         'price',
+        'status',
     ];
 
     public function customer(): BelongsTo
@@ -25,5 +27,10 @@ class Payment extends Model
     public function barber(): BelongsTo
     {
         return $this->belongsTo(Barber::class);
+    }
+
+    public function details(): HasOne
+    {
+        return $this->hasOne(PaymentDetails::class);
     }
 }

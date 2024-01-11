@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class PaymentDetails extends Model
@@ -15,4 +16,9 @@ class PaymentDetails extends Model
         'note',
         'price',
     ];
+
+    public function payment(): BelongsTo
+    {
+        return $this->belongsTo(Payment::class , 'payment_id');
+    }
 }
