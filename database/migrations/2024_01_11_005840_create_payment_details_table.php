@@ -9,6 +9,8 @@ return new class extends Migration {
     {
         Schema::create('payment_details', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('payment_id');
+            $table->foreign('payment_id')->references('id')->on('payments')->onDelete('cascade');
             $table->string('product');
             $table->text('note')->nullable();
             $table->string('price');

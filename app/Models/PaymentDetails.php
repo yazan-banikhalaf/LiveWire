@@ -10,6 +10,7 @@ class PaymentDetails extends Model
     use SoftDeletes;
 
     protected $fillable = [
+        'payment_id',
         'product',
         'note',
         'price',

@@ -11,7 +11,10 @@ return new class extends Migration {
             $table->id();
             $table->unsignedBigInteger('customer_id');
             $table->unsignedBigInteger('barber_id');
+            $table->foreign('customer_id')->references('id')->on('customers')->onDelete('cascade');
+            $table->foreign('barber_id')->references('id')->on('barbers')->onDelete('cascade');
             $table->enum('type' , ['cash' , 'qlik'])->default('cash');
+            $table->enum('status' , ['paid' , 'waiting'])->default('paid');
             $table->integer('price');
             $table->softDeletes();
             $table->timestamps();

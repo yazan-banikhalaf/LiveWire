@@ -5,6 +5,7 @@ namespace App\Livewire;
 use App\Models\Barber;
 use App\Models\Customer;
 use App\Models\Payment;
+use App\Models\PaymentDetails;
 use Livewire\Component;
 
 class CreatePayment extends Component
@@ -14,6 +15,10 @@ class CreatePayment extends Component
     public $check;
     public $price;
     public $type;
+
+    public $product;
+    public $product_price;
+    public $note;
 
     public $customer_id;
 
@@ -43,12 +48,41 @@ class CreatePayment extends Component
             'type' => 'required|in:cash,qlik',
         ]);
 
-        Payment::create([
+        $payment = Payment::create([
             'customer_id' => $this->customer_id,
             'barber_id' => $this->barber,
             'price' => $this->price,
             'type' => $this->type,
         ]);
+
+        if ($this->show_details)
+        {
+            $this->validate([
+                'note' => 'nullable',
+                'product' => 'required',
+                'product_price' => 'required'
+            ]);
+
+            PaymentDetails::create([
+                'payment_id' => $payment->id,
+                'product' => $this->product,
+                'note' => $this->note,
+                'price' => $this->price,
+            ]);
+        }
+
+        session()->flash('message', 'Payment created successfully!');
+        $this->restInputs();
+        return redirect('dashboard');
+
+    }
+
+    public function restInputs()
+    {
+        $this->customer_id = '';
+        $this->barber = '';
+        $this->price = '';
+        $this->type = '';
     }
 
     public function selectCustomer($customer_name)

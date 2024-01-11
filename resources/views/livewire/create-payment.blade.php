@@ -1,5 +1,35 @@
 <div>
 
+    @if(session()->has('message'))
+        <p x-data="{ show: true }"
+           x-show="show"
+           x-transition
+           x-init="setTimeout(() => show = false, 4000)"
+           class="text-sm text-orange-600 dark:text-orange-400"
+        >
+            {{ session('message') }}
+        </p>
+    @endif
+
+        @if ($errors->any())
+            <div class="alert alert-danger">
+                <ul class="list-item">
+                    @foreach ($errors->all() as $error)
+                        <li>
+                            <p x-data="{ show: true }"
+                               x-show="show"
+                               x-transition
+                               x-init="setTimeout(() => show = false, 4000)"
+                               class="text-sm text-orange-600 dark:text-orange-400"
+                            >
+                                {{ $error }}
+                            </p>
+                        </li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
+
     <div class="grid gap-3 grid-cols-4">
         <div class="mb-4">
             <label class="block  text-sm font-bold mb-2" for="customer">Customer</label>
@@ -34,11 +64,12 @@
         <div class="mb-4">
             <label class="block  text-sm font-bold mb-2" for="barber">Barbe</label>
             <select id="barber" wire:model.live="barber" class="block capitalize mt-1 w-full border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-indigo-500 dark:focus:border-indigo-600 focus:ring-indigo-500 dark:focus:ring-indigo-600 rounded-md shadow-sm">
-                @foreach($barbers as $barber)
+                <option value=""></option>
+                 @foreach($barbers as $barber)
                     <option value="{{$barber->id}}">{{$barber->name}}</option>
                 @endforeach
             </select>
-            @error('name') <span class="text-red-500 text-xs">{{$message}}</span> @enderror
+            @error('barber') <span class="text-red-500 text-xs">{{$message}}</span> @enderror
         </div>
 
         <div class="mb-4 flex flex-row w-full gap-3" >
@@ -51,11 +82,12 @@
             <div class="wrapper w-full">
                 <label class="block  text-sm font-bold mb-2" for="barber">Type</label>
                 <select id="barber" wire:model.live="type" class="block capitalize mt-1 border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-indigo-500 dark:focus:border-indigo-600 focus:ring-indigo-500 dark:focus:ring-indigo-600 rounded-md shadow-sm">
+                    <option value=""></option>
                     @foreach(['cash' , 'qlik'] as $type)
                         <option value="{{$type}}">{{$type}}</option>
                     @endforeach
                 </select>
-                @error('name') <span class="text-red-500 text-xs">{{$message}}</span> @enderror
+                @error('type') <span class="text-red-500 text-xs">{{$message}}</span> @enderror
             </div>
         </div>
 
@@ -72,21 +104,21 @@
             <div class="grid gap-3 grid-cols-3">
                 <div class="mb-4">
                     <label class="block  text-sm font-bold mb-2" for="name">Product Name</label>
-                    <x-text-input wire:model.live="customer" id="name" class="block mt-1 w-full" type="text" name="name"  placeholder="Name Customer..." />
-                    @error('name') <span class="text-red-500 text-xs">{{$message}}</span> @enderror
+                    <x-text-input wire:model.live="product" id="name" class="block mt-1 w-full" type="text" name="name"  placeholder="Name Product..." />
+                    @error('product') <span class="text-red-500 text-xs">{{$message}}</span> @enderror
                 </div>
 
                 <div class="mb-4">
                     <label class="block  text-sm font-bold mb-2" for="name">Note</label>
-                    <x-text-input wire:model.live="customer" id="name" class="block mt-1 w-full" type="text" name="name"  placeholder="Name Customer..." />
-                    @error('name') <span class="text-red-500 text-xs">{{$message}}</span> @enderror
+                    <x-text-input wire:model.live="note" id="name" class="block mt-1 w-full" type="text" name="name"  placeholder="Note..." />
+                    @error('note') <span class="text-red-500 text-xs">{{$message}}</span> @enderror
                 </div>
 
 
                 <div class="mb-4">
-                    <label class="block  text-sm font-bold mb-2" for="name">Product Price</label>
-                    <x-text-input wire:model.live="customer" id="name" class="block mt-1 w-full" type="text" name="name"  placeholder="Name Customer..." />
-                    @error('name') <span class="text-red-500 text-xs">{{$message}}</span> @enderror
+                    <label class="block  text-sm font-bold mb-2" for="product_price">Product Price</label>
+                    <x-text-input wire:model.live="product_price" id="product_price" class="block mt-1 w-full" type="text" name="name"  placeholder="Product Price ..." />
+                    @error('product_price') <span class="text-red-500 text-xs">{{$message}}</span> @enderror
                 </div>
             </div>
         </div>
@@ -95,12 +127,9 @@
 
 
     <div class="flex flex-col w-full">
-        <button wire:click="submit" class="uppercase border-2 hover:bg-orange-500 transition text-white font-bold py-2 px-4 rounded">
+        <button wire:click="submit" class="text-orange-700 hover:text-orange-100 uppercase border-2 hover:bg-orange-500 transition font-bold py-2 px-4 rounded">
             Add
         </button>
     </div>
-
-
-
 
 </div>
