@@ -12,6 +12,5 @@ class Barber extends Model
         'name',
         'email',
         'phone'
-
     ];
 }
