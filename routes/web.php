@@ -1,12 +1,9 @@
 <?php
 
-use App\Models\Barber;
-use App\Livewire\Users;
-use App\Livewire\Barbers;
-use App\Livewire\EditUser;
-use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\BarberController;
+use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\ProfileController;
+use Illuminate\Support\Facades\Route;
 
 /*
 |--------------------------------------------------------------------------
@@ -23,8 +20,12 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/dashboard', [Users::class,'index'])->name('dashboard');
+Route::get('/dashboard', function () {
+    return view('dashboard');
+})->middleware(['auth', 'verified'])->name('dashboard');
+
 Route::get('/barbers', [BarberController::class,'index'])->name('barbers');
+Route::get('/customers', [CustomerController::class,'index'])->name('customers');
 
 
 Route::middleware('auth')->group(function () {
